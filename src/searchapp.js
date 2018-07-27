@@ -2,12 +2,14 @@
 
 import SearchArea from './SearchArea'
 import Item from './stockitem'
+import StockDataPoints from './stock-data-points'
+import StockChart from './stock-chart'
 
 class SearchApp extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			items : props.arr,
+			items : props.data,
 		}
 		this.activate = this.activate.bind(this)
 		this.deactivate = this.deactivate.bind(this)
@@ -45,18 +47,48 @@ class SearchApp extends React.Component {
 		this.setState({ items : newState })
 	}
 
-	injectRandom() {
-		return <p> rand </p>
+	generateChartData() {
+		const dataObj = {
+			labels : [1, 2, 3, 4, 5, 6],
+			datasets : this.removeUndefined(this.state.items.map((item) => {
+				if(item.active)
+				{
+					return {
+						label : item.name,
+						data : item.data,
+						backgroundColor : [
+							'rgba(0, 0, 0, 0)'
+						],
+						borderColor : [ item.color ],
+						borderWidth : 1
+					}
+				}
+			}))
+		}
+		return dataObj
+	}
+
+	removeUndefined(dataObj) {
+		var ret = []
+		dataObj.forEach((e) => {
+			if(e != undefined){
+				ret.push(e)
+			}
+		})
+		return ret
 	}
 
 	render() {
 		return (
-<div>
-	<h5>Search Me</h5>
-	<SearchArea />
-	<div className="row">
-		<div className='col-6'>
-			<h5>Inactive</h5>
+<div className="container mx-auto">
+	<StockChart chartData={this.generateChartData()} chartOptions={{animation : false}}/>
+	<div>
+		<StockDataPoints />
+		<SearchArea />
+		<DataPointSlider />
+	</div>
+	<div className="row mb-2">
+		<div className='col-4 mx-auto border selectionDiv'>
 			{
 				this.state.items.map((item) => { 
 					if(item.active == false){ 
@@ -65,8 +97,16 @@ class SearchApp extends React.Component {
 				})
 			}
 		</div>
-		<div className='col-6'>
-			<h5>Active</h5>
+		<div className='col-3 mx-auto border selectionDiv'>
+			{
+				this.state.items.map((item) => { 
+					if(item.active == true){ 
+						return <Item clickCb={this.deactivate} id={item.id} name={item.name} />
+					}
+				})
+			}
+		</div>
+		<div className='col-4 mx-auto border selectionDiv'>
 			{
 				this.state.items.map((item) => { 
 					if(item.active == true){ 

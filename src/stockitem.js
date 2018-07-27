@@ -7,9 +7,7 @@ class Item extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<div onClick={(e) => this.props.clickCb(this.props.id, e)}>{this.props.name} Click to add me</div>
-			</div>
+			<div className="border round stockItemDiv" onClick={(e) => this.props.clickCb(this.props.id, e)}>{this.props.name}</div>
 		)
 	}
 }

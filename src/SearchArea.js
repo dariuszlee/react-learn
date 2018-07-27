@@ -2,7 +2,10 @@
 
 class SearchArea extends React.Component {
 	render() {
-		return (<input type="text" className="col-12" />)
+		return (
+			<div  className="mb-2 mx-auto col-4">
+				<input type="text"/>
+			</div>)
 	}
 }
 
