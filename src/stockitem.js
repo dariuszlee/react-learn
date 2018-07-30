@@ -5,9 +5,13 @@ class Item extends React.Component {
 		super(props)
 	}
 
+	handleClick(ev){
+		this.props.clickCb(this.props.id, ev.ctrlKey)
+	}
+
 	render() {
 		return (
-			<div className="border round stockItemDiv" onClick={(e) => this.props.clickCb(this.props.id, e)}>{this.props.name}</div>
+			<div className="border round stockItemDiv" onClick={(e) => {this.handleClick(e)}}>{this.props.name}</div>
 		)
 	}
 }

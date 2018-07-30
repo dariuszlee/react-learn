@@ -5,8 +5,8 @@ function generateStocks(num, pointsOfDat) {
 		stocks.push({
 			id : i,
 			name : generateStockName(),
-			data : generateStockData(pointsOfDat),
-			active : true,
+			data : generateDayWeekMonthAggregate(generateStockData(pointsOfDat)),
+			active : 'h',
 			color : generateStockColor()
 		})
 	}
@@ -20,6 +20,26 @@ function generateStockColor(){
 	rgbaString += Math.floor(Math.random() * 255) + ', '
 	rgbaString += '1)'
 	return rgbaString
+}
+
+function generateDayWeekMonthAggregate(data){
+	const weekData = aggregateDataByVal(data, 7)
+	const monthData = aggregateDataByVal(data, 30)
+	return {
+		day : data,
+		week : weekData,
+		month : monthData
+	}
+}
+
+function aggregateDataByVal(data, val) {
+	var ret = []
+	const numOfPeriods = Math.ceil(data.length / val)
+	for(var i = 0; i < numOfPeriods; i++) {
+		ret.push(data.slice(i * val + 1, i * val + (val - 1)).reduce((acc, cur) => acc + cur) / val)
+	}
+	ret.push(data[data.length-1])
+	return ret
 }
 
 function generateStockData(pointsOfData) {
@@ -48,4 +68,4 @@ function generateStockName(){
 }
 
 // console.log(generateStockColor())
-export default { generate : generateStocks }
+export default { generate : generateStocks , generateColor : generateStockColor}

@@ -3,9 +3,10 @@
 class SearchArea extends React.Component {
 	render() {
 		return (
-			<div  className="mb-2 mx-auto col-4">
-				<input type="text"/>
-			</div>)
+			<div  className="filterDiv mx-3">
+				<input placeholder="Filter stock codes" type="text"/>
+			</div>
+		)
 	}
 }
 

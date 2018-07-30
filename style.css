@@ -1,5 +1,9 @@
-header {
-	padding: 154px 0 100px;
+.header-space {
+	padding: 20px 0 100px;
+}
+
+header{
+	padding: 104px 0 20px 0;
 }
 
 section {
@@ -13,17 +17,48 @@ section {
 .chartDiv {
 	display : block;
 	min-width : 420px;
-	min-height : 140px;
-	max-width : 600px;
-	max-height : 200px;
+	min-height : 210px;
+	max-width : 1200px;
+	max-height : 600px;
 }
 
 .selectionDiv {
 	height : 150px;
+	overflow : hidden;
 }
 
 .stockItemDiv {
 	display : inline-block;
 	border-radius : 10px;
 	padding : 2px;
+}
+
+.singleLineDiv{
+	display : inline-block;
+}
+
+.filterDiv {
+	display : inline-block;
+	padding-top : 5px;
+}
+
+.sliderDiv {
+	display : inline-block;
+	padding-top : 8px;
+}
+
+.sliderSpan {
+	display : inline-block;
+	padding-left : 10px;
+	padding-right: 10px;
+	/* vertical-align : middle; */
+}
+
+#rangeInput {
+	vertical-align :middle;
+}
+
+.stock-button {
+	margin-left : 2px;
+	margin-right : 2px;
 }
